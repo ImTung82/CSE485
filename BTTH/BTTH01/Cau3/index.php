@@ -20,7 +20,7 @@
     if (($handle = fopen($filename, "r")) !== FALSE) {
         // Đọc dòng đầu tiên (tiêu đề)
         $headers = fgetcsv($handle, 1000, ",");
-
+        
         /*
             -   File CSV KTPM2 gốc có Encoding là UTF-8 with BOM, có thể kiểm tra được bằng cách mở file CSV bằng Visual Studio Code, và nhìn vào phần Encoding ở góc dưới bên phải màn hình
             -   Khi lưu file CSV từ Excel, Excel thường lưu kèm BOM, nhất là với những file có ký tự đặc biệt hoặc dấu tiếng Việt
@@ -41,35 +41,37 @@
     }
 ?>
 
-<body class="bg-slate-100">
-    <main class="mx-24 pt-[20px] pb-[75px">
-        <table class="text-[18px] w-full border border-gray-300 bg-white">
-            <thead class="bg-gray-200 text-black font-bold h-[50px]">
-                <tr>
-                    <th class="py-3 px-4 border border-gray-300">Username</th>
-                    <th class="py-3 px-4 border border-gray-300">Password</th>
-                    <th class="py-3 px-4 border border-gray-300">Lastname</th>
-                    <th class="py-3 px-4 border border-gray-300">Firstname</th>
-                    <th class="py-3 px-4 border border-gray-300">City</th>
-                    <th class="py-3 px-4 border border-gray-300">Email</th>
-                    <th class="py-3 px-4 border border-gray-300">Course</th>
-                </tr>
-            </thead>
-            
-            <tbody>
-                <?php foreach ($sinhvien as $sv): ?>
-                    <tr class="border-b-[1px] hover:bg-gray-100 transition">
-                        <td class="py-4 px-4 border border-gray-300 font-bold" style="width: 15%"><?= htmlspecialchars($sv['username']); ?></td>
-                        <td class="py-4 px-4 border border-gray-300 text-left" style="width: 15%"><?= htmlspecialchars($sv['password']); ?></td>
-                        <td class="py-4 px-4 border border-gray-300 font-bold" style="width: 20%"><?= htmlspecialchars($sv['lastname']); ?></td>
-                        <td class="py-4 px-4 border border-gray-300 text-left" style="width: 10%"><?= htmlspecialchars($sv['firstname']); ?></td>
-                        <td class="py-4 px-4 border border-gray-300 font-bold" style="width: 15%"><?= htmlspecialchars($sv['city']); ?></td>
-                        <td class="py-4 px-4 border border-gray-300 text-left" style="width: 20%"><?= htmlspecialchars($sv['email']); ?></td>
-                        <td class="py-4 px-4 border border-gray-300 text-left" style="width: 5%"><?= htmlspecialchars($sv['course1']); ?></td>
+<body class="bg-gray-100">
+    <main class="mx-24 pt-8 pb-20">
+        <p class="font-bold text-3xl text-center text-gray-700 pb-6">Danh sách sinh viên</p>
+        <div class="overflow-x-auto shadow-lg rounded-lg">
+            <table class="min-w-full text-sm text-left text-gray-700 bg-white">
+                <thead class="bg-blue-600 text-white font-semibold">
+                    <tr>
+                        <th class="py-3 px-6">Username</th>
+                        <th class="py-3 px-6">Password</th>
+                        <th class="py-3 px-6">Lastname</th>
+                        <th class="py-3 px-6">Firstname</th>
+                        <th class="py-3 px-6">City</th>
+                        <th class="py-3 px-6">Email</th>
+                        <th class="py-3 px-6">Course</th>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <?php foreach ($sinhvien as $sv): ?>
+                        <tr class="border-b hover:bg-blue-100 transition-colors duration-300">
+                            <td class="py-4 px-6"><?= htmlspecialchars($sv['username']); ?></td>
+                            <td class="py-4 px-6"><?= htmlspecialchars($sv['password']); ?></td>
+                            <td class="py-4 px-6"><?= htmlspecialchars($sv['lastname']); ?></td>
+                            <td class="py-4 px-6"><?= htmlspecialchars($sv['firstname']); ?></td>
+                            <td class="py-4 px-6"><?= htmlspecialchars($sv['city']); ?></td>
+                            <td class="py-4 px-6"><?= htmlspecialchars($sv['email']); ?></td>
+                            <td class="py-4 px-6"><?= htmlspecialchars($sv['course1']); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     </main>
 </body>
 </html>
