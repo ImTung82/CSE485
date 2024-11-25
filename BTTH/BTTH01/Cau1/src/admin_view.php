@@ -45,7 +45,7 @@
 
     <main class="mx-24 pt-[20px] pb-[75px]">
         <div class="pb-10">
-            <a href="add_form.php" class="bg-green-700 text-white px-4 py-2 rounded-lg shadow hover:bg-green-800 transition">
+            <a href="add_form.php" class="bg-green-400 text-white px-5 py-3 rounded-lg shadow hover:bg-green-700 transition">
                 Thêm mới
             </a>
         </div>
