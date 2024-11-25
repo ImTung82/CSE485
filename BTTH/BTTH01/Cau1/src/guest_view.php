@@ -29,7 +29,7 @@
     </header>
 
     <main>
-        <div class="mx-80 bg-white pl-36 pr-48 rounded-xl">
+        <div class="mx-80 my-10 bg-white pl-36 pr-48 rounded-xl pt-10">
             <div>
                 <?php
                     include 'flowers_list.php';
@@ -39,10 +39,10 @@
                     if (isset($flowers)) {
                         foreach ($flowers as $flower) {
                             echo "<div class='flower w-[580px]'>";
-                            echo "<p class='font-bold text-xl pt-10 pb-4'>{$index}. {$flower['name']}</p>";
+                            echo "<p class='font-bold text-xl mb-2 pb-4'>{$index}. {$flower['name']}</p>";
                             echo "<p style='width: 580px'>{$flower['description']}</p>";
                             echo "<img src='{$flower['image1']}' alt='{$flower['name']}' width='580' class='pt-4 pb-4'>";
-                            echo "<img src='{$flower['image2']}' alt='{$flower['name']}' width='580'>";
+                            echo "<img src='{$flower['image2']}' alt='{$flower['name']}' width='580' class='pb-10'>";
                             echo "</div>";
                             $index += 1;
                         }
