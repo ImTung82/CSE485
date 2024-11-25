@@ -32,8 +32,6 @@
             return ltrim($header, "﻿"); // Loại bỏ ký tự BOM
         }, $headers);
 
-        var_dump($headers);
-
         // Đọc từng dòng dữ liệu
         while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
             $sinhvien[] = array_combine($headers, $data);
