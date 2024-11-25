@@ -19,9 +19,9 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.3/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-gray-100">
     <div class="w-full h-screen flex items-center justify-center">
-        <div class="bg-white p-8 rounded shadow-lg w-[400px]">
+        <div class="bg-white p-8 rounded-xl shadow-md w-[400px]">
             <h2 class="text-2xl font-bold mb-4">Xác nhận xóa</h2>
             <p>Bạn có chắc chắn muốn xóa: <strong><?= htmlspecialchars($flowerToDelete['name']); ?></strong>?</p>
             <form action="delete_process.php" method="post" class="mt-4">
