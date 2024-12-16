@@ -25,7 +25,7 @@
         </div>
         <div class="mb-3">
             <label for="reported_date" class="form-label">Thời gian báo cáo</label>
-            <input type="date" class="form-control" id="reported_date" name="reported_date" required>
+            <input type="datetime-local" class="form-control" id="reported_date" name="reported_date" step="1" min="0000-01-01T00:00:00" max="9999-12-31T23:59:59" required>
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Mô tả sự cố</label>

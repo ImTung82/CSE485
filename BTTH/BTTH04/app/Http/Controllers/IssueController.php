@@ -10,7 +10,7 @@ class IssueController extends Controller
 {
     public function index()
     {
-        $issues = Issue::with('computer')->paginate(5);
+        $issues = Issue::all();
         return view('issues.index', compact('issues'));
     }
 
@@ -48,6 +48,7 @@ class IssueController extends Controller
             'computer_id' => 'required|exists:computers,id',
             'reported_by' => 'nullable|max:255',
             'reported_date' => 'nullable|date',
+            'description' => 'required',
             'urgency' => 'required|in:Low,Medium,High',
             'status' => 'required|in:Open,In Progress,Resolved',
         ]);

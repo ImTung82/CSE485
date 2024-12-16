@@ -19,7 +19,7 @@ class IssuesTableSeeder extends Seeder
         for ($i = 0; $i < 100; $i++) {
             DB::table('issues')->insert([
                 'computer_id' => $faker->numberBetween(1, 100),
-                'reported_by' => $faker->optional()->name(),
+                'reported_by' => $faker->name(),
                 'reported_date' => $faker->dateTimeBetween('-1 year', 'now'),
                 'description' => $faker->sentence(10),
                 'urgency' => $faker->randomElement(['Low', 'Medium', 'High']),

@@ -3,16 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Bootstrap CRUD Data Table for Database with Modal Form</title>
+<title>Quản Lý Vấn Đề Máy Tính</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<!-- Liên kết Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <style>
 body {
@@ -155,57 +153,6 @@ table.table .avatar {
 	margin-top: 10px;
 	font-size: 13px;
 }    
-/* Custom checkbox */
-.custom-checkbox {
-	position: relative;
-}
-.custom-checkbox input[type="checkbox"] {    
-	opacity: 0;
-	position: absolute;
-	margin: 5px 0 0 3px;
-	z-index: 9;
-}
-.custom-checkbox label:before{
-	width: 18px;
-	height: 18px;
-}
-.custom-checkbox label:before {
-	content: '';
-	margin-right: 10px;
-	display: inline-block;
-	vertical-align: text-top;
-	background: white;
-	border: 1px solid #bbb;
-	border-radius: 2px;
-	box-sizing: border-box;
-	z-index: 2;
-}
-.custom-checkbox input[type="checkbox"]:checked + label:after {
-	content: '';
-	position: absolute;
-	left: 6px;
-	top: 3px;
-	width: 6px;
-	height: 11px;
-	border: solid #000;
-	border-width: 0 3px 3px 0;
-	transform: inherit;
-	z-index: 3;
-	transform: rotateZ(45deg);
-}
-.custom-checkbox input[type="checkbox"]:checked + label:before {
-	border-color: #03A9F4;
-	background: #03A9F4;
-}
-.custom-checkbox input[type="checkbox"]:checked + label:after {
-	border-color: #fff;
-}
-.custom-checkbox input[type="checkbox"]:disabled + label:before {
-	color: #b8b8b8;
-	cursor: auto;
-	box-shadow: none;
-	background: #ddd;
-}
 /* Modal styles */
 .modal .modal-dialog {
 	max-width: 400px;
@@ -233,38 +180,13 @@ table.table .avatar {
 	resize: vertical;
 }
 .modal .btn {
-	border-radius: 2px;
+	border-radius: 6px;
 	min-width: 100px;
 }	
 .modal form label {
 	font-weight: normal;
-}	
+}
 </style>
-<script>
-$(document).ready(function(){
-	// Activate tooltip
-	$('[data-toggle="tooltip"]').tooltip();
-	
-	// Select/Deselect checkboxes
-	var checkbox = $('table tbody input[type="checkbox"]');
-	$("#selectAll").click(function(){
-		if(this.checked){
-			checkbox.each(function(){
-				this.checked = true;                        
-			});
-		} else{
-			checkbox.each(function(){
-				this.checked = false;                        
-			});
-		} 
-	});
-	checkbox.click(function(){
-		if(!this.checked){
-			$("#selectAll").prop("checked", false);
-		}
-	});
-});
-</script>
 </head>
 <body>
 <div class="container-xl">
@@ -289,34 +211,51 @@ $(document).ready(function(){
 			<table class="table table-striped table-hover">
 				<thead>
 					<tr>
-						<th>Mã vấn đề</th>
+						<th>#</th>
                         <th>Tên máy tính</th>
                         <th>Tên phiên bản</th>
                         <th>Người báo cáo sự cố</th>
                         <th>Thời gian báo cáo</th>
                         <th>Mức độ sự cố</th>
                         <th>Trạng thái hiện tại</th>
+						<th>Hành động</th>
 					</tr>
 				</thead>
 				<tbody>
                     @foreach ($issues as $issue)
                         <tr>
-                            <td>{{ $issue->id }}</td>
+                            <td class="fw-bold">{{ $issue->id }}</td>
                             <td>{{ $issue->computer->computer_name }}</td>
                             <td>{{ $issue->computer->operating_system }}</td>
                             <td>{{ $issue->reported_by }}</td>
                             <td>{{ $issue->reported_date }}</td>
-                            <td>{{ $issue->urgency }}</td>
-                            <td>{{ $issue->status }}</td>
                             <td>
-                                <a href="{{ route('issues.edit', $issue->id) }}" class="btn btn-primary">Sửa</a>
+								<span class="
+										@if ($issue->urgency === 'Low') text-success
+										@elseif ($issue->urgency === 'Medium') text-warning fw-medium
+										@elseif ($issue->urgency === 'High') text-danger fw-bold
+										@endif">
+
+										{{ $issue->urgency }}
+								</span>
+							</td>
+							<td>
+								<span class="
+									@if ($issue->status === 'Open') text-success
+									@elseif ($issue->status === 'In Progress') text-warning fw-medium
+									@elseif ($issue->status === 'Resolved') text-primary fw-bold
+									@endif">
+
+									{{ $issue->status }}
+								</span>
+							</td>
+                            <td>
+                                <a href="{{ route('issues.edit', $issue->id) }}"><button type="button" class="btn btn-primary">Sửa</button></a>
         
-                                <!-- Nút xóa kèm modal xác nhận -->
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $issue->id }}">
                                     Xóa
                                 </button>
         
-                                <!-- Modal xác nhận xóa -->
                                 <div class="modal fade" id="deleteModal{{ $issue->id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ $issue->id }}" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -325,7 +264,7 @@ $(document).ready(function(){
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                Bạn có chắc chắn muốn xóa đồ án này không?
+                                                Bạn có chắc chắn muốn xóa vấn đề này không?
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
@@ -342,10 +281,6 @@ $(document).ready(function(){
                         </tr>
                     @endforeach
 			</table>
-			{{-- Phân trang nếu cần --}}
-			<div class="d-flex justify-content-center">
-				{{ $issues->links('pagination::bootstrap-4') }}
-			</div>
 		</div>
 	</div>        
 </div>
