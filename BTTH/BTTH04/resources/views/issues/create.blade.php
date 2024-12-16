@@ -48,6 +48,7 @@
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Thêm</button>
+        <a href="{{ route('issues.index') }}" class="btn btn-secondary">Hủy</a>
     </form>
 </body>
 </html>

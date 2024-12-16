@@ -9,6 +9,9 @@
 </head>
 <body>
     <h1 style="margin: 50px 50px">Cập nhật Vấn Đề</h1>
+    <div class="alert alert-primary" style="margin: 50px 50px">
+        Bạn đang chỉnh sửa vấn đề có mã: <strong>{{ $issue->id }}</strong>
+    </div>
     <form action="{{ route('issues.update', $issue->id) }}" method="POST" style="margin: 50px 50px">
         @csrf
         @method('PUT')
@@ -58,6 +61,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Cập nhật</button>
+        <a href="{{ route('issues.index') }}" class="btn btn-secondary">Hủy</a>
     </form>
 </body>
 </html>

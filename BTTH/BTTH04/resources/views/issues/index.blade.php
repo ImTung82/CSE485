@@ -154,7 +154,7 @@ table.table .avatar {
 	font-size: 13px;
 }    
 /* Modal styles */
-.modal .modal-dialog {
+/* .modal .modal-dialog {
 	max-width: 400px;
 }
 .modal .modal-header, .modal .modal-body, .modal .modal-footer {
@@ -185,7 +185,7 @@ table.table .avatar {
 }	
 .modal form label {
 	font-weight: normal;
-}
+} */
 </style>
 </head>
 <body>
@@ -252,7 +252,7 @@ table.table .avatar {
                             <td>
                                 <a href="{{ route('issues.edit', $issue->id) }}"><button type="button" class="btn btn-primary">Sửa</button></a>
         
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $issue->id }}">
+                                <!-- <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $issue->id }}">
                                     Xóa
                                 </button>
         
@@ -276,7 +276,13 @@ table.table .avatar {
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
+
+								<form action="{{ route('issues.destroy', $issue->id) }}" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa vấn đề này không?')">
+									@csrf
+									@method('DELETE')
+									<button type="submit" class="btn btn-danger">Xóa</button>
+								</form>
                             </td>
                         </tr>
                     @endforeach

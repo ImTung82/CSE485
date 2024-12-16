@@ -56,7 +56,8 @@ class IssueController extends Controller
         $issue = Issue::findOrFail($id);
         $issue->update($request->all());
 
-        return redirect()->route('issues.index')->with('success', 'Vấn đề đã được cập nhật thành công!');
+        return redirect()->route('issues.index')
+            ->with('success', 'Vấn đề có mã: ' . $issue->id .  ' đã được cập nhật thành công!');
     }
 
     public function destroy($id)
@@ -64,6 +65,6 @@ class IssueController extends Controller
         $issue = Issue::findOrFail($id);
         $issue->delete();
 
-        return redirect()->route('issues.index')->with('success', 'Vấn đề đã được xóa thành công!');
+        return redirect()->route('issues.index')->with('success', 'Vấn đề có mã: ' . $issue->id .  ' đã được xóa thành công!');
     }
 }
